@@ -12,8 +12,9 @@ const ProductCard = (props) => (
                 :
                 <div className="food-section-flex">
                     {ProductPhoto(props.product.id, props.product.backgroundURL)}
-                    {ProductDescription(props.product.name, props.product.description)}                    
-                </div>}
+                    {ProductDescription(props.product.name, props.product.description)}
+                </div>
+        }
     </figure>
 );
 

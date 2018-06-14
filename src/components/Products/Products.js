@@ -14,17 +14,17 @@ export default class Products extends Component {
     this.filterByExpiration = this.filterByExpiration.bind(this);
   }
 
-  componentDidMount() {
-    fetch('https://formula-test-api.herokuapp.com/menu')
-      .then(response => response.json())
-      .then(items => { this.filterByExpiration(items) })
+  async componentDidMount() {
+    const response = await fetch('https://formula-test-api.herokuapp.com/menu');
+    const items = await response.json();
+    await this.filterByExpiration(items);
   }
 
   filterByExpiration(items) {
     const today = new Date();
     this.setState({
       products: items.filter(item => {
-        const splitDate = item.expirationDate.split("-");
+        const splitDate = item.expirationDate.split('-');
         const currentDate = new Date(splitDate[2], splitDate[0] - 1, splitDate[1]);
         return currentDate > today;
       })
