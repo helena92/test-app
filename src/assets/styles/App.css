@@ -251,3 +251,7 @@ footer>div {
     opacity: 0.9;
 }
 
+.formErrors {
+    color: red;
+    font-family: OpenSansRegular;
+}

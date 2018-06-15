@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FormErrors from './FormErrors';
 
 class Contact extends Component {
   constructor(props) {
@@ -6,17 +7,33 @@ class Contact extends Component {
     this.state = {
       email: '',
       name: '',
-      comment: ''
+      comment: '',
+      formErrors: { email: '' },
+      emailValid: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleInputChange(event) {
-    const name = event.target.name;
+  handleInputChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({ [name]: value },
+      () => { this.validateField(name, value) });
+  }
+
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let emailValid = this.state.emailValid;
+
+    if ((fieldName) === 'email') {
+      emailValid = value.match(/^[\w.%+-]+@[\w-]+\.+[\w]{2,}$/i);
+      fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+    }
     this.setState({
-      [name]: event.target.value
+      formErrors: fieldValidationErrors,
+      emailValid: emailValid
     });
   }
 
@@ -45,6 +62,9 @@ class Contact extends Component {
     return (
       <div className="contact-container">
         <form className="contact-form" onSubmit={this.handleSubmit} onChange={this.handleInputChange}>
+          <div className="form-error-panel">
+            <FormErrors formErrors={this.state.formErrors} />
+          </div>
           <ul>
             <li>
               <label>
@@ -65,7 +85,7 @@ class Contact extends Component {
               </label>
             </li>
             <li>
-              <button type="submit">Submit</button>
+              <button type="submit" disabled={!this.state.emailValid}>Submit</button>
             </li>
           </ul>
         </form>
