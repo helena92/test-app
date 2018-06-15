@@ -4,16 +4,12 @@ import ProductCard from './ProductCard';
 
 const getProducts = (products) => {
     return (
-        <div className="food-block">
-            {
-                products.map(product => <ProductCard key={product.id} product={product} />)
-            }
-        </div>
+        products.map(product => <ProductCard key={product.id} product={product} />)
     );
 };
 
 const ProductsList = (props) => (
-    <div>
+    <div className="food-block">
         {getProducts(props.products)}
     </div>
 );
@@ -22,7 +18,7 @@ ProductsList.defaultProps = {
     products: []
 };
 
- ProductsList.propTypes = {
+ProductsList.propTypes = {
     products: PropTypes.array
 };
 

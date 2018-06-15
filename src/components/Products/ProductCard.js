@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ProductCard = (props) => (
-    <figure >
+    <div >
         {
             props.product.id & 1 ?
                 <div className="food-section-flex">
@@ -15,7 +15,7 @@ const ProductCard = (props) => (
                     {ProductDescription(props.product.name, props.product.description)}
                 </div>
         }
-    </figure>
+    </div>
 );
 
 const ProductDescription = (name, descr) => (

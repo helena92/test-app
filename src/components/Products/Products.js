@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import hotdogImage from '../../assets/images/hotdog.png';
 import ProductsList from './ProductsList';
+import Banner from '../Banner';
 
 export default class Products extends Component {
 
@@ -34,13 +34,7 @@ export default class Products extends Component {
   render() {
     return (
       <div>
-        <div className="flex-banner">
-          <div className="logo-container">
-            <img src={hotdogImage} alt="" />
-          </div>
-          <p className="slogan-title">Dirty Dogs serves all-beef, vegan and vegetarian hot dogs.</p>
-          <button className="slogan-btn">More Dogs ‘n Make Em Hot</button>
-        </div>
+        <Banner />
         <ProductsList products={this.state.products} />
       </div>
     );

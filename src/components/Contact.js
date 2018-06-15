@@ -21,13 +21,11 @@ class Contact extends Component {
   }
 
   handleSubmit = async (event) => {
-    console.log(event.target)
     event.preventDefault();
-
     const data = {
-      "name": this.state.name,
-      "email": this.state.email,
-      "comment": this.state.comment,
+      email: this.state.email,
+      name: this.state.name,
+      comment: this.state.comment
     }
     const response = await fetch('https://formula-test-api.herokuapp.com/contact', {
       method: 'POST',
@@ -35,11 +33,17 @@ class Contact extends Component {
     })
     const resData = await response.json();
     console.log(resData);
+
+    this.setState({
+      email: '',
+      name: '',
+      comment: ''
+    });
   }
 
   render() {
     return (
-      <div className="container">
+      <div className="contact-container">
         <form className="contact-form" onSubmit={this.handleSubmit} onChange={this.handleInputChange}>
           <ul>
             <li>

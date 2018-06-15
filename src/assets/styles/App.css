@@ -31,7 +31,6 @@ body {
 .nav-flex-container {
     display: flex;
     justify-content: center;
-    /* max-width: 1446px; */
 }
 
 .nav-flex-container>a {
@@ -62,7 +61,6 @@ body {
 
 .flex-banner {
     height: 687px;
-    /* max-width: 1446px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,7 +91,7 @@ body {
     font-family: ProximaNovaSemiBold;
 }
 
-.food-block>figure {
+.food-block>div {
     font-size: 0;
 }
 
@@ -130,10 +128,7 @@ div.shadow>img {
 
 .food-section-flex {
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
-    /* position: relative; */
-    /* max-width: 1446px; */
 }
 
 .food-block {
@@ -175,13 +170,15 @@ footer {
     background-color: #efefef;
 }
 
-.footer-sign {
+
+footer>div {
     display: flex;
-    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
     height: 80px;
+    max-width: 1446px;
     justify-content: space-between;
-    padding: 0 28px;
-    max-width: 1400px;
+    align-items: center;
 }
 
 .footer-sign>p {
@@ -189,13 +186,13 @@ footer {
     font-family: OpensSansRegular;
 }
 
-.container {
+.contact-container {
     width: 80%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.container * {
+.contact-container * {
     box-sizing: border-box;
     font-family: OpenSansRegular;
     font-size: 18px;
@@ -206,7 +203,7 @@ footer {
 }
 
 .contact-form li{
-  padding-top: 10px;
+  padding-top: 15px;
   display: flex;
   justify-content: center;
 }
@@ -219,6 +216,12 @@ footer {
     height: 600px;
 }
 
+
+.contact-form input[type=text], 
+.contact-form textarea {
+    width: 100%;
+}
+
 .contact-form input[type=text] {
     width: 100%;
     padding: 12px 20px;
@@ -226,7 +229,6 @@ footer {
 }
 
 .contact-form textarea {
-    width: 100%;
     height: 150px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -235,12 +237,17 @@ footer {
     resize: none;
 }
 
-.contact-form button[type=submit] {
-    background-color: #4CAF50;
+.contact-form button {
+    background-color: rgb(70, 161, 73);
     border: none;
     color: white;
     padding: 16px 32px;
     margin: 10px 2px;
+    border-radius: 4px;
+}
+
+.contact-form button:hover {
     cursor: pointer;
+    opacity: 0.9;
 }
 
