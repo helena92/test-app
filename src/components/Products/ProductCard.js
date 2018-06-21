@@ -21,7 +21,7 @@ const ProductCard = (props) => (
 const ProductDescription = (name, descr) => (
     <div className="food-description">
         <h3 className="food-title">{name}</h3>
-        <figcaption className="food-qoute">{descr}</figcaption>
+        <p className="food-qoute">{descr}</p>
     </div>
 )
 
