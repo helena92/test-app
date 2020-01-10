@@ -2,7 +2,7 @@
 Welcome to Skyfence installer
 Select mode:
 4) Uninstall all components
-5) Uninstall Management
+5) Uninstall Managementbbfg
 6) Uninstall Gateway
 Choose mode: 6
 Do you want to use custom certificate?: [y/n] n
