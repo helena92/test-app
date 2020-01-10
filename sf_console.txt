@@ -1,0 +1,1 @@
+/usr/skyfence/gateway/bin/gatewayctl console
