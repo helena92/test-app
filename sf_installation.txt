@@ -1,0 +1,59 @@
+[root@skyfence ~]# /usr/skyfence/base/scripts/installer.sh 
+Welcome to Skyfence installer
+Select mode:
+4) Uninstall all components
+5) Uninstall Management
+6) Uninstall Gateway
+Choose mode: 6
+Do you want to use custom certificate?: [y/n] n
+Uninstalling gateway..
+Shutting down sf_gateway:                                  [  OK  ]
+Shutting down system logger:                               [  OK  ]
+Starting system logger:                                    [  OK  ]
+
+Installer was ended successfully
+[root@skyfence ~]# /usr/skyfence/base/scripts/installer.sh 
+Welcome to Skyfence installer
+Select mode:
+3) Install Gateway
+5) Uninstall Management
+Choose mode: 3
+Do you want to install the box?: [y/n] n
+
+Retrieve Gateway properties:
+
+Enter the Gateway name: mapping
+Enter the Gateway mode (sniffer/proxy/sp-proxy/evaluator): proxy
+Enter gateway listening interface: eth0
+Enter the Gateway External IP address: 192.168.3.110
+Is gateway deployed as a cluster?: [y/n] n
+Enter gateway listening port (press enter to finish): 
+Enable VPN (transparent proxy): [y/n] y
+Enter VPN listening interface: eth0
+Enter valid VPN IP address: 10.0.0.240
+Enter gateway listening port (press enter to finish): 80
+Is the VPN port listening for SSL traffic: [y/n] n
+Enter gateway listening port (press enter to finish): 443
+Is the VPN port listening for SSL traffic: [y/n] y
+Enter gateway listening port (press enter to finish): 
+Should the gateway register to the management?: [y/n] n
+Do you want to use custom certificate?: [y/n] n
+Installing gateway..
+Warning: interface eth0:100 already exists
+Determining if ip address 10.0.0.240 is already in use for device eth0...
+Configuring gateway:                                       [  OK  ]
+Shutting down system logger:                               [  OK  ]
+Starting system logger:                                    [  OK  ]
+Starting sf_gateway:                                       [  OK  ]
+Installing watchdog:                                       [  OK  ]
+
+Installer was ended successfully
+[root@skyfence ~]# /usr/skyfence/gateway/bin/scripts/register_gateway.sh 
+Management hostname: evgeniy.local
+Management port: 4433
+Management password: 
+# Stopping the gateway
+Gateway stopped!
+# Registering to evgeniy.local:4433
+ERROR! failed to send or bad response from management
+[root@skyfence ~]# 
