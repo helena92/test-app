@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Last updated: 11 01 2018 15:46:28 +0200 --><asset-configuration>
+	<proxy-settings>
+		<domains>
+			<domain name="accertify.net"/>      
+            <domain name="cdn-net.com"/>
+            <domain name="accdab.net"/>
+		</domains>
+	</proxy-settings>
+	<transactions-configuration asset-name="citri" total="32">
+		<!-- Default Transaction -->
+		<transaction id="citri-20">
+			<predicates>
+				<url-prefix exact-match="false"/>
+			</predicates>
+			<status-predicates/>
+			<activity-info/>
+			<session>
+				<get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+			</session>
+		</transaction>
+		 <!--  Success Login -->
+		<transaction id="citri-21">
+			<predicates>
+				<url-regex><![CDATA[/unsecured/index\.jsf]]></url-regex>
+				<http-method>POST</http-method>
+			</predicates>
+			<status-predicates>
+				<custom-predicate source="response-headers" type="regex"><![CDATA[JSESSIONID]]></custom-predicate>
+			</status-predicates>
+			<activity-info>
+				<protocol-type>Accertify</protocol-type>
+				<action>login</action>
+				<status>success</status>
+			</activity-info>
+			<session>
+				<username source="request-body" type="regex" decoder="url"><![CDATA[username=(?P<ID>[^&]+)]]></username>
+				<set-session-binding source="response-headers" type="regex"><![CDATA[JSESSIONID=(?P<ID>[^;]+)]]></set-session-binding>
+			</session>
+		</transaction>
+		<!--  Failed Login -->
+		<transaction id="citri-22">
+			<predicates>
+				<url-regex><![CDATA[/unsecured/index\.jsf]]></url-regex>
+				<http-method>POST</http-method>
+			</predicates>
+			<status-predicates>
+				<custom-predicate source="response-headers" type="regex" negate="true"><![CDATA[JSESSIONID]]></custom-predicate>
+			</status-predicates>
+			<activity-info>
+				<protocol-type>Accertify</protocol-type>
+				<action>login</action>
+				<status>failure</status>
+			</activity-info>
+			<session>
+				<username source="request-body" type="regex" decoder="url"><![CDATA[username=(?P<ID>[^&]+)]]></username>
+			</session>
+		</transaction>
+		<!-- Logout -->
+		<transaction id="citri-23">
+			<predicates>
+				<url-regex><![CDATA[/unsecured/logouti\.jsf]]></url-regex>
+				<http-method>GET</http-method>
+			</predicates>
+			<status-predicates/>
+			<activity-info>
+				<protocol-type>Accertify</protocol-type>
+				<action>logout</action>
+			</activity-info>
+			<session>
+				<get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+			</session>
+		</transaction>		
+        <!-- View address book  -->
+		<transaction id="citri-24">
+			<predicates>
+				<url-regex><![CDATA[/jsp/agent/addressbook/addressbook\.jsf]]></url-regex>
+				<http-method>GET</http-method>
+			</predicates>
+			<status-predicates/>
+			<activity-info>
+				<protocol-type>Accertify</protocol-type>
+				<action>view</action>
+				<data-object>Address book</data-object>
+			</activity-info>		
+			<session>
+                <get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+                <parse-record source="response-body" type="regex" multiple="true"><![CDATA[option value="(?P<ID>[^"]+)">(?P<NAME>[^<]+)]]></parse-record><!-- Parse for contact types address book  -->
+			</session>
+            <labels>
+				<static-label name="Address book" ui-type="module"/>
+			</labels>
+		</transaction>
+        <!-- Add a new one to the address book  -->
+		<transaction id="citri-25">
+			<predicates>
+				<url-regex><![CDATA[/jsp/agent/addressbook/addressbookdetail\.jsf]]></url-regex>
+				<http-method>POST</http-method>
+			</predicates>
+			<status-predicates/>
+			<activity-info>
+				<protocol-type>Accertify</protocol-type>
+				<action>create</action>
+				<data-object>Address book</data-object>
+			</activity-info>		
+			<session>
+                <get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+                <activity-record source="request-body" type="regex" decoder="url"><![CDATA[j_id_jsp_316462127_9=(?P<ID>[^&]+)]]></activity-record><!-- Contact type -->
+                <activity-record source="request-body" type="regex" decoder="url"><![CDATA[j_id_jsp_316462127_12=(?P<NAME>[^&]+)]]></activity-record><!-- First name -->
+                <activity-record source="request-body" type="regex" decoder="url"><![CDATA[j_id_jsp_316462127_16=(?P<NAME>[^&]+)]]></activity-record><!-- Last name -->
+                <activity-record source="request-body" type="regex" decoder="url"><![CDATA[j_id_jsp_316462127_20=(?P<NAME>[^&]+)]]></activity-record><!-- email -->
+                <activity-record source="request-body" type="regex" decoder="url"><![CDATA[j_id_jsp_316462127_23=(?P<NAME>[^&]+)]]></activity-record><!-- Company -->
+                <activity-record source="request-body" type="regex" decoder="url"><![CDATA[j_id_jsp_316462127_38=(?P<NAME>[^&]+)]]></activity-record><!-- Office phone -->
+                <activity-record source="request-body" type="regex" decoder="url"><![CDATA[j_id_jsp_316462127_42=(?P<NAME>[^&]+)]]></activity-record><!-- Cell phone -->                
+			</session>
+            <labels>
+				<static-label name="Address book" ui-type="module"/>
+			</labels>
+		</transaction>
+        <!-- View Queue filters  -->
+		<transaction id="citri-26">
+			<predicates>
+				<url-regex><![CDATA[/maintain/queueFilter/list]]></url-regex>
+				<http-method>GET</http-method>
+			</predicates>
+			<status-predicates/>
+			<activity-info>
+				<protocol-type>Accertify</protocol-type>
+				<action>view</action>
+				<data-object>Queue filters</data-object>
+			</activity-info>		
+			<session>
+                <get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+                <parse-record source="response-body" type="regex" multiple="true"><![CDATA[name=\"id" value=\"(?P<ID>[^"]+)(?:\s|.)+?td>(?P<ID>[a-zA-Z0-9+-._]+@[a-zA-Z0-9+-._]+)</td>\>]]></parse-record>
+			</session>
+            <labels>
+				<static-label name="Queue filters" ui-type="module"/>
+			</labels>
+		</transaction>
+        <!-- Parse for users in Queue filters  -->
+		<transaction id="citri-27">
+			<predicates>
+				<url-regex><![CDATA[/maintain/queueFilter/list]]></url-regex>
+				<http-method>GET</http-method>
+			</predicates>
+			<status-predicates/>
+			<activity-info/>		
+			<session>
+                <get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+                <parse-record source="response-body" type="regex" multiple="true"><![CDATA[name=\"id" value=\"(?P<ID>[^"]+)(?:\s|.)+?td>(?P<ID>[a-zA-Z0-9+-._]+@[a-zA-Z0-9+-._]+)</td>\>]]></parse-record>                                
+			</session>
+		</transaction>
+        <!-- View users info in queue filters  -->
+		<transaction id="citri-28">
+			<predicates>
+				<url-regex><![CDATA[/maintain/queueFilter/view/]]></url-regex>
+				<http-method>GET</http-method>
+			</predicates>
+			<status-predicates/>
+			<activity-info>
+				<protocol-type>Accertify</protocol-type>
+				<action>view</action>
+				<data-object>Queue filters</data-object>
+			</activity-info>		
+			<session>
+                <get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+                <activity-record source="response-body" type="regex"><![CDATA[<input type="text" value="(?P<NAME>[a-zA-Z0-9+-._]+@[a-zA-Z0-9+-._]+)]]></activity-record>
+			</session>
+            <labels>
+				<static-label name="Queue filters" ui-type="module"/>
+			</labels>
+		</transaction>
+        <!-- Parse for table names in Negative values  -->
+		<transaction id="citri-29">
+			<predicates>
+				<url-regex><![CDATA[/jsp/client/negativevalue/negvalue\.jsf]]></url-regex>
+				<http-method>GET</http-method>
+			</predicates>
+			<status-predicates/>
+			<activity-info/>		
+			<session>
+                <get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+                <parse-record source="response-body" type="regex" multiple="true"><![CDATA[option value="(?P<ID>[^"]+)".*?>(?P<NAME>[a-zA-z+\s]+)]]></parse-record><!-- Parse for contact types address book  -->			</session>
+		</transaction>
+        <!-- Add a new Negative values -->
+		<transaction id="citri-30">
+			<predicates>
+				<url-regex><![CDATA[/jsp/client/negativevalue/negvaluedetail\.jsf]]></url-regex>
+				<http-method>POST</http-method>
+			</predicates>
+			<status-predicates>
+				<custom-predicate source="request-body" type="regex"><![CDATA[j_id_jsp_1410508280_35]]></custom-predicate>
+			</status-predicates>
+			<activity-info>
+				<protocol-type>Accertify</protocol-type>
+				<action>create</action>
+				<data-object>Negative values</data-object>
+			</activity-info>		
+			<session>
+                <get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+                <activity-record source="request-body" type="regex" decoder="url"><![CDATA[negativeTable=(?P<ID>[^&]+)]]></activity-record>
+                <activity-record source="request-body" type="regex" decoder="url"><![CDATA[value=(?P<NAME>[^&]+)]]></activity-record>
+			</session>
+            <labels>
+				<static-label name="Negative values" ui-type="module"/>
+			</labels>
+		</transaction>
+		<!-- Parse for users names in Analyst Performance -->
+		<transaction id="citri-31">
+			<predicates>
+				<url-regex><![CDATA[/jsp/reporting/analystperformance/analystperformance\.jsf]]></url-regex>
+				<http-method>GET</http-method>
+			</predicates>
+			<status-predicates/>
+			<activity-info/>
+			<session>
+                <get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+                <parse-record source="response-body" type="regex" multiple="true"><![CDATA[option value="(?P<ID>[^"]+)".*?>(?P<NAME>[a-zA-z+\s]+)]]></parse-record><!-- Parse for contact types address book  -->			</session>
+		</transaction>
+		<!-- View users info in Analyst Performance -->
+		<transaction id="citri-32">
+			<predicates>
+				<url-regex><![CDATA[/ajaxHandler\?request=listAnalystPerformanceDetails&bucketId]]></url-regex>
+				<http-method>GET</http-method>
+			</predicates>
+			<status-predicates/>
+			<activity-info>
+				<protocol-type>Accertify</protocol-type>
+				<action>view</action>
+				<data-object>Analyst Performance</data-object>
+			</activity-info>
+			<session>
+                <get-session-binding source="request-headers" type="cookie" name="JSESSIONID"/>
+                <activity-record source="request-url" type="regex"><![CDATA[userId=(?P<ID>[^&]+)]]></activity-record>
+			</session>
+            <labels>
+				<static-label name="Analyst Performance" ui-type="module"/>
+			</labels>
+		</transaction>
+	</transactions-configuration>
+</asset-configuration>
