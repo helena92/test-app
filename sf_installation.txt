@@ -1,7 +1,7 @@
 [root@skyfence ~]# /usr/skyfence/base/scripts/installer.sh 
 Welcome to Skyfence installer
 Select mode:
-4) Uninstall all components
+4) Uninstall all compsddssdonents
 5) Uninstall Managementbbfg
 6) Uninstall Gateway
 Choose mode: 6
@@ -11,6 +11,19 @@ Shutting down sf_gateway:                                  [  OK  ]
 Shutting down system logger:                               [  OK  ]
 Starting system logger:                                    [  OK  ]
 
+dffd
+dffd
+dffd
+dffd
+dffd
+dffd
+dffd
+dffd
+dffd
+dffd
+dffd
+dffd
+dffd
 Installer was ended successfully
 [root@skyfence ~]# /usr/skyfence/base/scripts/installer.sh 
 Welcome to Skyfence installer

@@ -7,7 +7,7 @@ const Banner = () => (
             <img src={hotdogImage} alt="" />
         </div>
         <p className="slogan-title">Dirty Dogs serves all-beef, vegan and vegetarian hot dogs.</p>
-        <button className="slogan-btn">More Dogs ‘n Make Em Hot</button>
+        <button className="slogan-btn">More dddssdsdsdsdsddsdsdsdds Dogs ‘n Make Em Hot</button>
     </div>
 )
 
